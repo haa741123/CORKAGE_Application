@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         webview = findViewById(R.id.activity_main_web);
-        textview = findViewById(R.id.error_text);
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
@@ -184,4 +183,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }

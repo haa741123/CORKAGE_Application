@@ -23,6 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Mypage"
+            android:label="My Page">
+            <!-- 필요한 추가 설정 -->
+        </activity>
     </application>
 
 </manifest>

@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +32,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class Mypage extends AppCompatActivity {
     WebView webview;
     TextView textview;
 
@@ -41,13 +40,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.mypage);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
 
         webview = findViewById(R.id.activity_main_web);
+        textview = findViewById(R.id.textView);
         TextView textViewLocation = findViewById(R.id.location);
         textViewLocation.setOnClickListener(v -> {
             MyBottomSheetDialogFragment bottomSheetDialogFragment = new MyBottomSheetDialogFragment();
@@ -63,19 +63,18 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.navigation_home) {
-                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                Intent intent = new Intent(Mypage.this, MainActivity.class);
                 startActivity(intent);
                 return true;
             }
             if (item.getItemId() == R.id.navigation_notifications) {
-                Intent intent = new Intent(MainActivity.this, Mypage.class);
+                Intent intent = new Intent(Mypage.this, Mypage.class);
                 startActivity(intent);
                 return true;
             }
             return false;
         });
     }
-
 
     private void setWebView() {
         WebSettings webSettings = webview.getSettings();
@@ -130,28 +129,5 @@ public class MainActivity extends AppCompatActivity {
                     .show();
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 1 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_DENIED) {
-            new AlertDialog.Builder(this)
-                    .setMessage("위치 권한을 허용해주세요")
-                    .setPositiveButton("종료", (dialog, which) -> {
-                        dialog.dismiss();
-                        finish();
-                    })
-                    .setNegativeButton("권한 설정", (dialog, which) -> {
-                        dialog.dismiss();
-                        startActivity(new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                                .setData(Uri.parse("package:" + getPackageName()))
-                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                        setWebView();
-                    })
-                    .setCancelable(false)
-                    .show();
-        } else if (requestCode == 1) {
-            setWebView();
-        }
     }
 }

@@ -46,21 +46,13 @@ public class Mypage extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        webview = findViewById(R.id.activity_main_web);
-        textview = findViewById(R.id.textView);
-        TextView textViewLocation = findViewById(R.id.location);
-        textViewLocation.setOnClickListener(v -> {
-            MyBottomSheetDialogFragment bottomSheetDialogFragment = new MyBottomSheetDialogFragment();
-            bottomSheetDialogFragment.show(getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
-        });
+        webview = findViewById(R.id.activity_main_web2);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        } else {
-            setWebView();
-        }
+        setWebView();  // WebView 초기화를 참조 뒤에 호출
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        // 여기에서 navigation_notifications 항목을 선택된 상태로 설정
+        bottomNavigationView.setSelectedItemId(R.id.navigation_notifications);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.navigation_home) {
                 Intent intent = new Intent(Mypage.this, MainActivity.class);
@@ -74,6 +66,8 @@ public class Mypage extends AppCompatActivity {
             }
             return false;
         });
+
+
     }
 
     private void setWebView() {
@@ -112,7 +106,7 @@ public class Mypage extends AppCompatActivity {
             }
         });
 
-        webview.loadUrl("http://121.142.17.86:80");
+        webview.loadUrl("http://121.142.17.86:80/login");
     }
 
     @Override

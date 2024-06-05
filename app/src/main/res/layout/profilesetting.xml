@@ -13,10 +13,10 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="348dp"
+            android:layout_width="304dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:fontFamily="@font/pretendardbold"
             android:text="설정"
@@ -26,20 +26,78 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/location"
-            android:layout_width="348dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/pretendardbold"
-            android:text="계정"
-            android:textSize="15dp" />
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 각 스위치를 위한 개별 LinearLayout 생성 및 스타일 적용 -->
+            <TextView
+                android:layout_width="214dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:fontFamily="@font/pretendardbold"
+                android:text="설정"
+                android:textSize="15dp" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="이벤트 알림"
+                android:layout_marginTop="8dp"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="예약 알림"
+                android:layout_marginTop="8dp"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="메시지 알림"
+                android:layout_marginTop="8dp"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="예약 확인 "
+                android:layout_marginTop="8dp"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="뉴스레터"
+                android:enabled="false"
+                android:layout_marginTop="8dp"/>
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="예약 알림"
+                android:enabled="false"
+                android:layout_marginTop="8dp"/>
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="기타 알림"
+                android:enabled="false"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <LinearLayout

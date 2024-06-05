@@ -26,6 +26,9 @@
         <activity android:name=".Mypage">
             <!-- 필요한 추가 설정 -->
         </activity>
+        <activity android:name=".ProfileSetting">
+            <!-- 필요한 추가 설정 -->
+        </activity>
     </application>
 
 </manifest>

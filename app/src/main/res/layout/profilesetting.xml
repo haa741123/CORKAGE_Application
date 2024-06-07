@@ -79,21 +79,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="뉴스레터"
-                android:enabled="false"
                 android:layout_marginTop="8dp"/>
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switch6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="예약 알림"
-                android:enabled="false"
                 android:layout_marginTop="8dp"/>
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switch7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="기타 알림"
-                android:enabled="false"
                 android:layout_marginTop="8dp"/>
         </LinearLayout>
     </LinearLayout>

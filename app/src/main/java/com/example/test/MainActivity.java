@@ -72,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             }
+            if (item.getItemId() == R.id.navigation_cam) {
+                Intent intent = new Intent(MainActivity.this, CamController.class);
+                startActivity(intent);
+                return true;
+            }
             return false;
         });
     }

@@ -29,6 +29,9 @@
         <activity android:name=".ProfileSetting">
             <!-- 필요한 추가 설정 -->
         </activity>
+        <activity android:name=".CamController">
+            <!-- 필요한 추가 설정 -->
+        </activity>
 
     </application>
 

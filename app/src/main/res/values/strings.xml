@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">test</string>
     <string name="text_label_1">홈</string>
-    <string name="text_label_2">지도</string>
+    <string name="text_label_2">스캔</string>
     <string name="text_label_3">커뮤니티</string>
     <string name="text_label_4">내 정보</string>
 </resources>

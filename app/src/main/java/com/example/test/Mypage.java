@@ -65,6 +65,11 @@ public class Mypage extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             }
+            if (item.getItemId() == R.id.navigation_cam) {
+                Intent intent = new Intent(Mypage.this, CamController.class);
+                startActivity(intent);
+                return true;
+            }
             return false;
         });
 

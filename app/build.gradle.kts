@@ -29,12 +29,10 @@ android {
 }
 
 dependencies {
-
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.android.gms:play-services-location:20.0.0")
-    implementation("com.google.android.material:material:1.4.0")
 
     // TensorFlow Lite을 사용한 와인병 인식
     implementation("org.tensorflow:tensorflow-lite:2.4.0")
@@ -47,5 +45,4 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
 }

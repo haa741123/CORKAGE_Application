@@ -18,6 +18,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -65,6 +66,17 @@ public class Mypage extends AppCompatActivity {
                 return true;
             }
             return false;
+        });
+
+        ImageView settingButton = findViewById(R.id.setting);
+        settingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 클릭 시 수행할 동작
+                // 예: 새 액티비티로 이동
+                Intent intent = new Intent(Mypage.this, ProfileSetting.class);
+                startActivity(intent);
+            }
         });
 
 

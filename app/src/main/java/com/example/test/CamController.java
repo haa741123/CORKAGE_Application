@@ -1,19 +1,24 @@
 package com.example.test;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -35,17 +40,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * TensorFlow Lite을 사용한 와인병 인식:
- * 학습된 객체 감지 모델 (예: SSD MobileNet V2)을 다운로드하여 assets 폴더에 추가
- * 모델 파일 이름은 detect.tflite로 가정합니다.
- *
- * 의존성 추가: 위에서 설명한 대로 app/build.gradle(모듈) 파일에 TensorFlow Lite 의존성 추가
- * implementation("org.tensorflow:tensorflow-lite:2.4.0")
- * implementation("org.tensorflow:tensorflow-lite-support:0.1.0")
- *
- * 객체 감지: TensorFlow Lite을 사용하여 이미지에서 와인병을 감지하고 이를 잘라냅니다.
- * */
 public class CamController extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -115,18 +109,13 @@ public class CamController extends AppCompatActivity {
         TensorImage tensorImage = new TensorImage(DataType.UINT8);
         tensorImage.load(bitmap);
 
-        // Define the input shape
-        int imageSizeX = 300;  // Specify the input image width for your model
-        int imageSizeY = 300;  // Specify the input image height for your model
+        int imageSizeX = 300;
+        int imageSizeY = 300;
+        int outputShape = 10;
 
-        // Define the output shape
-        int outputShape = 10;  // The number of objects your model can detect
-
-        // Run the inference
         TensorBuffer outputBuffer = TensorBuffer.createFixedSize(new int[]{1, outputShape, 4}, DataType.FLOAT32);
         tflite.run(tensorImage.getBuffer(), outputBuffer.getBuffer());
 
-        // Process the output (Assuming the output is bounding box coordinates)
         float[] detectionResults = outputBuffer.getFloatArray();
         List<RectF> detectedObjects = new ArrayList<>();
 
@@ -138,9 +127,8 @@ public class CamController extends AppCompatActivity {
             detectedObjects.add(new RectF(left, top, right, bottom));
         }
 
-        // Crop the detected object from the original bitmap
         if (!detectedObjects.isEmpty()) {
-            RectF detectedObject = detectedObjects.get(0);  // Assuming the first detected object is the wine bottle
+            RectF detectedObject = detectedObjects.get(0);
             return Bitmap.createBitmap(bitmap,
                     (int) detectedObject.left,
                     (int) detectedObject.top,
@@ -152,22 +140,17 @@ public class CamController extends AppCompatActivity {
 
     private void callVisionAPI(Bitmap bitmap) {
         VisionController.VisionAPI visionAPI = VisionController.create();
-
-        // Bitmap을 Base64로 인코딩
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         String base64EncodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
-        // Vision API 요청 생성
         VisionAPIRequest request = new VisionAPIRequest();
         VisionAPIRequest.Request.Image image = new VisionAPIRequest.Request.Image();
         image.content = base64EncodedImage;
-
         VisionAPIRequest.Request.Feature feature = new VisionAPIRequest.Request.Feature();
-        feature.type = "LABEL_DETECTION";  // 필요한 기능 타입으로 변경 가능
+        feature.type = "LABEL_DETECTION";
         feature.maxResults = 10;
-
         VisionAPIRequest.Request apiRequest = new VisionAPIRequest.Request();
         apiRequest.image = image;
         apiRequest.features = new ArrayList<>();
@@ -176,7 +159,6 @@ public class CamController extends AppCompatActivity {
         request.requests = new ArrayList<>();
         request.requests.add(apiRequest);
 
-        // Vision API 호출
         Call<VisionAPIResponse> call = visionAPI.detectText(request);
         call.enqueue(new Callback<VisionAPIResponse>() {
             @Override
@@ -184,13 +166,11 @@ public class CamController extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     VisionAPIResponse visionResponse = response.body();
                     if (visionResponse != null && !visionResponse.responses.isEmpty()) {
-                        // API 응답 처리
                         VisionAPIResponse.Response resp = visionResponse.responses.get(0);
                         if (resp.textAnnotations != null && !resp.textAnnotations.isEmpty()) {
                             String detectedText = resp.textAnnotations.get(0).description;
-                            // 와인 정보를 표시
                             mWineInfoScrollView.setVisibility(View.VISIBLE);
-                            mWineName.setText(detectedText);  // 실제 응답 데이터에 따라 적절히 변경
+                            mWineName.setText(detectedText);
                         }
                     }
                 }
@@ -213,7 +193,26 @@ public class CamController extends AppCompatActivity {
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 dispatchTakePictureIntent();
+            } else if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
+                showSettingsDialog();
+            } else {
+                Toast.makeText(this, "카메라 권한이 필요합니다.", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    private void showSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("필요한 권한");
+        builder.setMessage("이 앱은 카메라 기능을 사용하기 위해 권한이 필요합니다. 설정에서 권한을 활성화해주세요.");
+        builder.setPositiveButton("설정으로 이동", (dialog, which) -> {
+            dialog.cancel();
+            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            Uri uri = Uri.fromParts("package", getPackageName(), null);
+            intent.setData(uri);
+            startActivity(intent);
+        });
+        builder.setNegativeButton("취소", (dialog, which) -> dialog.cancel());
+        builder.show();
     }
 }

@@ -25,65 +25,6 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <!-- NestedScrollingChild goes here (NestedScrollView, RecyclerView, etc.). -->
-
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_anchor="@+id/appBarLayout"
-                app:layout_anchorGravity="center"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-                <!-- Screen content goes here. -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <!-- Add your screen content here -->
-                </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
-
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/appBarLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.search.SearchBar
-                    android:id="@+id/search_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="검색어를 입력하세요" />
-            </com.google.android.material.appbar.AppBarLayout>
-
-            <com.google.android.material.search.SearchView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="검색어를 입력하세요"
-                app:layout_anchor="@id/search_bar">
-
-                <!-- Search suggestions/results go here (ScrollView, RecyclerView, etc.). -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    android:padding="16dp"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-            </com.google.android.material.search.SearchView>
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">

@@ -39,6 +39,9 @@
         <activity android:name=".CamController">
             <!-- 필요한 추가 설정 -->
         </activity>
+        <activity android:name=".Login">
+            <!-- 필요한 추가 설정 -->
+        </activity>
 
     </application>
 

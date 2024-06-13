@@ -20,11 +20,10 @@
     <!-- 하단에 버튼과 다른 UI 요소를 담을 LinearLayout -->
     <LinearLayout
         android:id="@+id/bottomLayout"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -33,26 +32,16 @@
         <Button
             android:id="@+id/textView2"
             android:layout_width="match_parent"
-            android:layout_height="43dp"
+            android:layout_height="69dp"
+            android:background="@drawable/button"
+            android:fontFamily="@font/pretendarmedium"
             android:gravity="center"
-            android:text="오늘 하루를 마무리하는 한잔 >"
-            android:textSize="20sp"
-            android:textColor="#FFFFFF"
-            android:fontFamily="@font/freesentation9black"/>
+            android:letterSpacing="0.03"
+            android:text="카카오톡으로 3초 회원가입"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <!-- 상단 우측에 정렬된 텍스트뷰, 흰색 텍스트 -->
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="건너뛰기"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/pretendardextralight"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

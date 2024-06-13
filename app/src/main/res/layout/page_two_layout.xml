@@ -5,19 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- 전체 화면을 채우는 이미지뷰 -->
     <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="0dp"
+        android:id="@+id/ImageviewPager2"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:srcCompat="@drawable/splash"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:scaleType="centerCrop" />
+        android:src="@drawable/explain2"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- 하단에 버튼과 다른 UI 요소를 담을 LinearLayout -->
     <LinearLayout
         android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
@@ -28,20 +25,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- LinearLayout 안에 중앙에 정렬된 텍스트뷰 -->
         <Button
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="69dp"
-            android:background="@drawable/button_black"
+            android:background="@drawable/button_red"
             android:fontFamily="@font/pretendarmedium"
             android:gravity="center"
             android:letterSpacing="0.03"
-            android:text="카카오톡으로 3초 회원가입"
+            android:text="시작하기"
             android:textColor="@color/white"
             android:textSize="16sp" />
     </LinearLayout>
-
-    <!-- 상단 우측에 정렬된 텍스트뷰, 흰색 텍스트 -->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

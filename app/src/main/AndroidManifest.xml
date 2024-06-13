@@ -42,6 +42,16 @@
         <activity android:name=".Login">
             <!-- 필요한 추가 설정 -->
         </activity>
+        <activity android:name=".ImageAdapter">
+            <!-- 필요한 추가 설정 -->
+        </activity>
+        <activity android:name=".ExplainCard">
+            <!-- 필요한 추가 설정 -->
+        </activity>
+        <activity android:name=".PageOne">
+            <!-- 필요한 추가 설정 -->
+        </activity>
+
 
     </application>
 

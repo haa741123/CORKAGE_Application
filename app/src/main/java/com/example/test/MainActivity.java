@@ -47,12 +47,11 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        webview = findViewById(R.id.activity_main_web);
-        TextView textViewLocation = findViewById(R.id.location);
-        textViewLocation.setOnClickListener(v -> {
-            MyBottomSheetDialogFragment bottomSheetDialogFragment = new MyBottomSheetDialogFragment();
-            bottomSheetDialogFragment.show(getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
-        });
+//        webview = findViewById(R.id.activity_main_web);
+//        textViewLocation.setOnClickListener(v -> {
+//            MyBottomSheetDialogFragment bottomSheetDialogFragment = new MyBottomSheetDialogFragment();
+//            bottomSheetDialogFragment.show(getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
+//        });
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);

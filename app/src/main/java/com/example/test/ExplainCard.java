@@ -28,7 +28,7 @@ public class ExplainCard extends AppCompatActivity {
     }
 
     private void moveMain() {
-        Intent intent = new Intent(ExplainCard.this, Login.class);
+        Intent intent = new Intent(ExplainCard.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
